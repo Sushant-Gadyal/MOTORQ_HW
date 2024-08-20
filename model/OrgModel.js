@@ -24,6 +24,24 @@ const OrgSchema = mongoose.Schema({
         type : String,
         required:true
     }
+    ,
+    parent:{
+        type : String ,
+        default : "null",
+    },
+    child:{
+        type : [String],
+        default : [],
+    },
+    level:{
+        type : Number,
+        default : 0,
+    },
+    // overidden : {
+    //     type : Boolean,
+    //     default : false,
+    // }
+
 
 })
 

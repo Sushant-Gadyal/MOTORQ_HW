@@ -16,10 +16,21 @@ q4router.post("/", async function(req,res){
             account : req.body.account,
             website : req.body.website,
             fuelReimbursementPolicy : req.body.fuelReimbursementPolicy || "1000",
-            speedLimitPolicy : req.body.speedLimitPolicy
+            speedLimitPolicy : req.body.speedLimitPolicy,
+            parent : req.body.parent,
     });
 
-
+    if(req.body.parent){
+        const parentnode = await OrgModel.findOne({name : req.body.parent});
+        if(parentnode){
+            parentnode.child.push(newOrg.name);
+            newOrg.level = parentnode.level + 1;
+            
+            await parentnode.save();
+            await newOrg.save();
+        }
+    }
+    
     res.status(201).json({newOrg});
     
 

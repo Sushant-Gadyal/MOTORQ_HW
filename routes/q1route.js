@@ -16,7 +16,7 @@ q1router.use(limiter);// Apply rate limiting to all routes
 
 
 
-q1router.get("/decode/:vin",async function(req,res){
+q1router.get("/:vin",async function(req,res){
     const {vin} = req.params;
 
     // Validate the VIN (ensure it's a 17 character alphanumeric string)
